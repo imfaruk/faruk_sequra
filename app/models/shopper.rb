@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Shopper < ApplicationRecord
   EMAIL_REGEX = /\A\S+@.+\.\S+\z/
 

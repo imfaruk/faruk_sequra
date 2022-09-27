@@ -8,6 +8,15 @@ class DisbursementFeeRule < ApplicationRecord
   validate :upper_and_lower_limit
   validate :upper_is_greater_than_lower
 
+  def self.amount_to_disburse(amount)
+    disbursement_rule = DisbursementFeeRule.where(':amount >= lower_bound AND :amount <= upper_bound', amount:).first
+    disbursement_rule.amount_to_disburse(amount)
+  end
+
+  def amount_to_disburse(amount)
+    amount * percentage / 100
+  end
+
   private
 
     def upper_and_lower_limit

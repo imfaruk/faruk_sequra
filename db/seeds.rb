@@ -21,4 +21,13 @@ ActiveRecord::Base.transaction do
   DisbursementFeeRule.create(lower_bound: 0.0, upper_bound: 50, percentage: 1)
   DisbursementFeeRule.create(lower_bound: 51.0, upper_bound: 300, percentage: 0.95)
   DisbursementFeeRule.create(lower_bound: 301.0, upper_bound: Float::INFINITY, percentage: 0.85)
+
+  puts 'Creating disbursements'
+  merchants =  Merchant.all
+  (1..52).to_a.each do |i|
+    calculate_at = DateTime.commercial(2018, i, 1)
+    merchants.each do |merchant|
+      GenerateDisbursementService.call(calculate_at:, merchant:)
+    end
+  end
 end
