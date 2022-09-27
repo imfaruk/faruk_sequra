@@ -1,24 +1,30 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+###  Ruby and Rails Version
+we are using ruby 3.1.3 and Rails 7.0.4
 
-Things you may want to cover:
+### Installation
+run `rake db:setup` for creating database, loading schema and importing seed data
 
-* Ruby version
+### Running tests
+run `rspec` to run the tests.
 
-* System dependencies
+### Scheduler
+Scheduler is defined in `config/initializers/scheduler.rb`
 
-* Configuration
+### API
+GET endpoint to query generated disbursements is:
 
-* Database creation
+- `http://localhost:3000/api/v1/disbursements`
 
-* Database initialization
+available arguments are `year`, `week` and `merchant_id`(optional)
 
-* How to run the test suite
+### Suggestion to improve
 
-* Services (job queues, cache servers, search engines, etc.)
+- The logic of getting the dibursement_period on GenerateDisbursementService is hard coded at the moment. If we need to support scenario where we want to generate disbursements monthly, then we might want to movie this logic outside of the service class and make it possible to define different rule for different merchants dynamically.
 
-* Deployment instructions
+- We mignt need more validation and error handling on DisbursementFeeRule.
 
-* ...
+- I prefer to document code using YARD. Ideally I would have done documentation.
+
+- Would prefer to have a Github Action or something similar for reporting ruboop warnings and test status.
