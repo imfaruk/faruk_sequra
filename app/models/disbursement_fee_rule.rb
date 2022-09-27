@@ -1,0 +1,2 @@
+class DisbursementFeeRule < ApplicationRecord
+end
